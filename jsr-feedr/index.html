@@ -23,16 +23,20 @@
             <a href="#"><h1>Feedr</h1></a>
             <nav>
               <ul>
-                <li><a href="#">News Source: <span>Source Name</span></a>
-                  <ul>
-                      <li><a href="#">Source 1</a></li>
-                      <li><a href="#">Source 2</a></li>
-                      <li><a href="#">Source 3</a></li>
+                <li><a href="#">News Category: <span>Category Name</span></a>
+                  <ul id="news-category">
+                      <li id="business"><a href="#">Business</a></li>
+                      <li id="entertainment"><a href="#">Entertainment</a></li>
+                      <li id="general"><a href="#">General</a></li>
+                      <li id="health"><a href="#">Health</a></li>
+                      <li id="science"><a href="#">Science</a></li>
+                      <li id="sports"><a href="#">Sports</a></li>
+                      <li id="technology"><a href="#">Technology</a></li>
                   </ul>
                 </li>
               </ul>
               <section id="search">
-                <input type="text" name="name" value="">
+                <input type="text" placeholder="Search for a source" autocomplete="off" name="name" value="">
                 <a href="#"><img src="images/search.png" alt="" /></a>
               </section>
             </nav>
@@ -40,7 +44,7 @@
           </section>
         </header>
         <div id="popUp" class="loader hidden">
-          
+
         </div>
         <section id="main" class="container">
 

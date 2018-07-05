@@ -3,14 +3,21 @@
   https://newsapi.org
 */
 var source = "abc-news";
+var type = "everything";
+var category;
 
 function getNews(){
 
   var promiseEverything = new Promise(function(resolve, reject) {
 
-    var url = "https://newsapi.org/v2/everything";
+    var url = "https://newsapi.org/v2/";
     var key = "c87b19f8a2494440a6d71204acf5d1f6";
-    var finalUrl = url + "?sources=" + source + "&apiKey=" + key;
+    var finalUrl;
+    if (type == "everything"){
+      finalUrl = url + type + "?sources=" + source + "&apiKey=" + key;
+    } else if (type == "top-headlines"){
+      finalUrl = url + type + "?country=us" + "&category=" + category + "&apiKey=" + key;
+    }
 
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', finalUrl);
@@ -25,6 +32,7 @@ function getNews(){
     openModal(JSON.parse(result));
   }, function() {
     console.log("It broke");
+    alert("There has been an error, please try another source.");
   });
 
   function addContent(result){
@@ -82,6 +90,7 @@ getNews();
 
 $("#search a").click(function(){
   $("#search").toggleClass("active");
+  $("#search input").val("");
 });
 
 $("#search input").keypress(function(e){
@@ -89,6 +98,7 @@ $("#search input").keypress(function(e){
     $("#search").removeClass("active");
     str = $("#search input").val();
     source = str.replace(/\s+/g, '-').toLowerCase();
+    type = "everything";
     $("#main").html("");
     getNews();
   }
@@ -96,6 +106,14 @@ $("#search input").keypress(function(e){
 
 $("h1").click(function(){
   source = "abc-news";
+  type = "everything";
+  $("#main").html("");
+  getNews();
+});
+
+$("#news-category").on("click", "li", function(){
+  category = $(this).attr("id");
+  type = "top-headlines";
   $("#main").html("");
   getNews();
 });
